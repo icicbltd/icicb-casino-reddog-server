@@ -47,9 +47,11 @@ function Result(array) {
             newArray.push(array[i] % 13);
         }
     }
+
     newArray.sort(function (a, b) { return b - a });
     var minus = newArray[0] - newArray[1];
     var cal;
+
     if (center > newArray[1] && center < newArray[0]) {
         switch (minus) {
             case 2:
@@ -96,7 +98,6 @@ module.exports = {
             res.json({
                 serverMsg: "Can't find Server!"
             })
-            delete user[token];
         }
     },
     BetRedDog: async (req, res) => {
@@ -122,7 +123,6 @@ module.exports = {
             res.json({
                 serverMsg: err.message
             })
-            delete user[token];
         }
     },
     Result: async (req, res) => {
@@ -179,6 +179,5 @@ module.exports = {
                 serverMsg: err.message
             })
         }
-        delete user[token];
     },
 };
