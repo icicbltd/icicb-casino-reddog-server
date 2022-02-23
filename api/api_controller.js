@@ -140,29 +140,29 @@ module.exports = {
             var raisePrice = (user[token].raiseAmount + user[token].betAmount) * response;
             var msg = "You win : " + "+" + raisePrice;
             var total = user[token].amount + raisePrice;
-            // try {
-            //     await axios.post(
-            //         process.env.PLATFORM_SERVER + "api/games/bet",
-            //         {
-            //             token: user[token].userToken,
-            //             amount: user[token].betAmount + user[token].raiseAmount,
-            //         }
-            //     );
-            // } catch (err) {
-            //     throw new Error("Bet Error!");
-            // }
-            // try {
-            //     await axios.post(
-            //         process.env.PLATFORM_SERVER + "api/games/winlose",
-            //         {
-            //             token: user[token].userToken,
-            //             amount: raisePrice,
-            //             winState: raisePrice != 0 ? true : false,
-            //         }
-            //     )
-            // } catch (err) {
-            //     throw new Error("WinLose Error!");
-            // }
+            try {
+                await axios.post(
+                    process.env.PLATFORM_SERVER + "api/games/bet",
+                    {
+                        token: user[token].userToken,
+                        amount: user[token].betAmount + user[token].raiseAmount,
+                    }
+                );
+            } catch (err) {
+                throw new Error("Bet Error!");
+            }
+            try {
+                await axios.post(
+                    process.env.PLATFORM_SERVER + "api/games/winlose",
+                    {
+                        token: user[token].userToken,
+                        amount: raisePrice,
+                        winState: raisePrice != 0 ? true : false,
+                    }
+                )
+            } catch (err) {
+                throw new Error("WinLose Error!");
+            }
             try {
                 res.json({
                     msg: msg,
